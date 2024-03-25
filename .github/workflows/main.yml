@@ -14,11 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     # Step to run the snyk api "import endpoint as part of the job
     steps:
-    - uses: actions/checkout@master
-    - name: curl
-      uses: enflo/curl-action@master
-      with:
-        curl: curl -X "POST" "https://api.snyk.io/api/v1/org/0d569e9a-dafe-40b5-a12e-24d711296a56/integrations/396ed33c-761c-4abb-92e4-a614c85b2b6f/import?page=1&perPage=1000&sortBy=severity&order=asc" \
+    - name : Snyk API Import
+      run: | 
+        curl -X POST "https://api.snyk.io/api/v1/org/0d569e9a-dafe-40b5-a12e-24d711296a56/integrations/396ed33c-761c-4abb-92e4-a614c85b2b6f/import?page=1&perPage=1000&sortBy=severity&order=asc" \
         -H "Authorization: token 26ba134f-1768-44c9-ab75-32d4f2ff7cda" \
         -H "Content-Type: application/json; charset=utf-8" \
          -d '{
@@ -27,4 +25,3 @@ jobs:
             "name":"juice-shop"
           }
          }'
-        
