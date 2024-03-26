@@ -22,6 +22,7 @@ jobs:
          -d '{
           "target":{
             "owner":"rchaib",
-            "name":"juice-shop"
+            "name":"juice-shop",
+            "branch":"master"
           }
          }'
