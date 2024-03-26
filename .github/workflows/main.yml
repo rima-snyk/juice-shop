@@ -7,10 +7,6 @@ on:
   # Triggers the workflow every 5 minutes
   schedule:
     - cron: "*/5 * * * *"
-env:
-  SNYK_ORG_ID: ${{vars.SNYK_ORG_ID}}
-  SNYK_GHE_INTEGRATION_ID: ${{vars.SNYK_GHE_INTEGRATION_ID}}
-  SNYK_TOKEN: ${{vars.SNYK_TOKEN}}
 jobs:
   # This workflow contains a single job called "cron"
   cron:
@@ -20,8 +16,8 @@ jobs:
     steps:
     - name : Snyk API Import
       run: | 
-        curl -X POST "https://api.snyk.io/api/v1/org/$SNYK_ORG_ID/integrations/$SNYK_GHE_INTEGRATION_ID/import?page=1&perPage=1000&sortBy=severity&order=asc" \
-        -H "Authorization: token $SNYK_TOKEN" \
+        curl -X POST "https://api.snyk.io/api/v1/org/${{vars.SNYK_ORG_ID}}/integrations/${{vars.SNYK_GHE_INTEGRATION_ID}}/import?page=1&perPage=1000&sortBy=severity&order=asc" \
+        -H "Authorization: token ${{vars.SNYK_TOKEN}}" \
         -H "Content-Type: application/json; charset=utf-8" \
          -d '{
           "target":{
