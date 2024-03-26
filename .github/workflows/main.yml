@@ -20,7 +20,7 @@ jobs:
         -H "Content-Type: application/json; charset=utf-8" \
         -d '{
           "target":{
-            "owner":"rchaib",
+            "owner":"rima-snyk",
             "name":"juice-shop",
             "branch":"master"
           }
