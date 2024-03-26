@@ -12,14 +12,14 @@ jobs:
   cron:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # Step to run the snyk api "import endpoint as part of the job
+    # Step to run the snyk api "import target" endpoint as part of the job
     steps:
     - name : Snyk API Import
       run: | 
         curl -X POST "https://api.snyk.io/api/v1/org/${{vars.SNYK_ORG_ID}}/integrations/${{vars.SNYK_GHE_INTEGRATION_ID}}/import?page=1&perPage=1000&sortBy=severity&order=asc" \
         -H "Authorization: token ${{vars.SNYK_TOKEN}}" \
         -H "Content-Type: application/json; charset=utf-8" \
-         -d '{
+        -d '{
           "target":{
             "owner":"rchaib",
             "name":"juice-shop",
