@@ -1,7 +1,6 @@
 # This is an import workflow to help you auto-import your repository every 5 minutes
  
-name:
-  Auto Import Cron Job
+name: Auto Import Cron Job
   # Controls when the workflow will run
 on:
   # Triggers the workflow every 5 minutes
@@ -16,7 +15,7 @@ jobs:
     steps:
     - name : Snyk API Import
       run: | 
-        curl -X POST "https://api.snyk.io/api/v1/org/${{vars.SNYK_ORG_ID}}/integrations/${{vars.SNYK_GHE_INTEGRATION_ID}}/import?page=1&perPage=1000&sortBy=severity&order=asc" \
+        curl -X POST "https://api.snyk.io/api/v1/org/${{vars.SNYK_ORG_ID}}/integrations/${{vars.SNYK_GHE_INTEGRATION_ID}}/import" \
         -H "Authorization: token ${{vars.SNYK_TOKEN}}" \
         -H "Content-Type: application/json; charset=utf-8" \
         -d '{
