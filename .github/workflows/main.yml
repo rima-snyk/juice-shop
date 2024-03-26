@@ -26,3 +26,7 @@ jobs:
             "branch":"master"
           }
          }'
+      env:
+         SNYK_ORG_ID: ${{vars.SNYK_ORG_ID}}
+         SNYK_GHE_INTEGRATION_ID: ${{vars.SNYK_GHE_INTEGRATION_ID}}
+         SNYK_TOKEN: ${{vars.SNYK_TOKEN}}
