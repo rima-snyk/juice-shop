@@ -1,28 +1,13 @@
-# This is an import workflow to help you auto-import your repository at the end of every day
- 
-name: Auto Import Cron Job
-  # Controls when the workflow will run
-on:
-  # Triggers the workflow every 5 minutes
-  schedule:
-    - cron: "0 0 * * *"
+name: Example workflow for Node using Snyk
+on: push
 jobs:
-  # This workflow contains a single job called "cron"
-  cron:
-    # The type of runner that the job will run on
+  security:
     runs-on: ubuntu-latest
-    # Step to run the snyk api "import target" endpoint as part of the job
     steps:
-    - name : Snyk API Import
-      run: | 
-        curl -X POST "https://api.snyk.io/api/v1/org/${{vars.SNYK_ORG_ID}}/integrations/${{vars.SNYK_GHE_INTEGRATION_ID}}/import" \
-        -H "Authorization: token ${{vars.SNYK_TOKEN}}" \
-        -H "Content-Type: application/json; charset=utf-8" \
-        -d '{
-          "target":{
-            "owner":"rima-snyk",
-            "name":"juice-shop",
-            "branch":"master"
-          }
-         }'
-  
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --code --severity-threshold=high
