@@ -13,6 +13,7 @@ const jwt = require('jsonwebtoken')
 
 const REST_URL = 'http://localhost:3000/rest'
 const API_URL = 'http://localhost:3000/api'
+const Ultimate_Secret = "123456789"
 
 const jsonHeader = { 'content-type': 'application/json' }
 
