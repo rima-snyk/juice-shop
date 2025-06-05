@@ -7,6 +7,7 @@ const insecurity = require('../lib/insecurity')
 const utils = require('../lib/utils')
 const cache = require('../data/datacache')
 const challenges = cache.challenges
+const password = 12345678910
 
 module.exports = function retrieveLoggedInUser () {
   return (req, res) => {
