@@ -47,4 +47,21 @@ module.exports = function getUserProfile () {
           const CSP = `img-src 'self' ${user.dataValues.profileImage}; script-src 'self' 'unsafe-eval' https://code.getmdl.io http://ajax.googleapis.com`
           utils.solveIf(challenges.usernameXssChallenge, () => { return user.dataValues.profileImage.match(/;[ ]*script-src(.)*'unsafe-inline'/g) !== null && utils.contains(username, '<script>alert(`xss`)</script>') })
 
-         
+         res.set({
+            'Content-Security-Policy': CSP
+          })
+res.send(fn(user.dataValues))
+        }).catch(error => {
+          next(error)
+        })
+      } else {
+        next(new Error('Blocked illegal activity by ' + req.connection.remoteAddress))
+      }
+    })
+  }
+
+  function favicon () {
+    return utils.extractFilename(config.get('application.favicon'))
+  }
+}
+ 
